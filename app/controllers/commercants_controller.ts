@@ -24,8 +24,9 @@ export default class CommercantsController {
       const commercant = await Commercant.create({
         id: utilisateur_id,
         store_name: store_name,
-        business_address: business_address,
-        contact_number: contact_number || null,
+        business_address: business_address || null,
+        verification_state: 'pending',
+        contact_number: contact_number,
         contract_start_date: DateTime.fromJSDate(contract_start_date),
         contract_end_date: DateTime.fromJSDate(contract_end_date),
       })
@@ -60,6 +61,48 @@ export default class CommercantsController {
       return response.ok(commercantData)
     } catch (error) {
       return response.badRequest({ message: 'Wrong Parametters', error_code: error })
+    }
+  }
+
+  async verfiy({ request, response }: HttpContext) {
+    try {
+      const commercant = await Commercant.findOrFail(request.param('id'))
+      commercant.verification_state = 'verified'
+      commercant.contract_start_date = DateTime.now()
+      commercant.contract_end_date = DateTime.now().plus({ years: 1 })
+      await commercant.save()
+      return response.ok({ message: 'Commercant verified successfully', commercant: commercant.serialize() })
+    } catch (error) {
+      return response.badRequest({ message: 'Error verifying commercant', error_code: error })
+    }
+  }
+
+  async reject({ request, response }: HttpContext) {
+    try {
+      const commercant = await Commercant.findOrFail(request.param('id'))
+      commercant.verification_state = 'rejected'
+      await commercant.save()
+      return response.ok({ message: 'Commercant rejected successfully', commercant: commercant.serialize() })
+    } catch (error) {
+      return response.badRequest({ message: 'Error rejecting commercant', error_code: error })
+    }
+  }
+
+  async getUnverified({ response }: HttpContext) {
+    try {
+      const commercants = await Commercant.query().where('verification_state', 'pending')
+      return response.ok({ commercants: commercants.map((commercant) => commercant.serialize()) })
+    } catch (error) {
+      return response.badRequest({ message: 'Error fetching unverified commercants', error: error })
+    }
+  }
+
+  async getVerified({ response }: HttpContext) {
+    try {
+      const commercants = await Commercant.query().where('verification_state', 'verified')
+      return response.ok({ commercants: commercants.map((commercant) => commercant.serialize()) })
+    } catch (error) {
+      return response.badRequest({ message: 'Error fetching verified commercants', error: error })
     }
   }
 }

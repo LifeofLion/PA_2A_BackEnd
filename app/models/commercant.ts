@@ -21,6 +21,9 @@ export default class Commercant extends BaseModel {
   @column()
   declare contract_end_date: DateTime
 
+  @column()
+  declare verification_state: 'pending' | 'verified' | 'rejected'
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

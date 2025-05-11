@@ -90,6 +90,10 @@ router
     router.post('add', [CommercantController, 'add'])
     router.get(':id/profile', [CommercantController, 'getProfile'])
     router.put(':id/profile', [CommercantController, 'updateProfile'])
+    router.post('reject/:id', [CommercantController, 'reject'])
+    router.post('verify/:id', [CommercantController, 'verfiy'])
+    router.get('unverified', [CommercantController, 'getUnverified'])
+    router.get('verified', [CommercantController, 'getVerified'])
   })
   .prefix('commercants')
 

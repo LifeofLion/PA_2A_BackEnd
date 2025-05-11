@@ -11,6 +11,10 @@ export default class extends BaseSchema {
       table.string('contact_number', 20).nullable()
       table.date('contract_start_date').notNullable()
       table.date('contract_end_date').notNullable()
+      table
+        .enum('verification_state', ['pending', 'verified', 'rejected'])
+        .notNullable()
+        .defaultTo('pending')
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

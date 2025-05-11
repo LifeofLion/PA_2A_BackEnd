@@ -10,6 +10,7 @@ export default class extends BaseSeeder {
         "contact_number": "123-456-7890",
         "contract_start_date": new Date('2023-01-01'),
         "contract_end_date": new Date('2024-01-01'),
+        "verification_state": "pending",
         "created_at": new Date(),
         "updated_at": new Date()
       },
@@ -20,6 +21,7 @@ export default class extends BaseSeeder {
         "contact_number": "987-654-3210",
         "contract_start_date": new Date('2023-02-01'),
         "contract_end_date": new Date('2024-02-01'),
+        "verification_state": "pending",
         "created_at": new Date(),
         "updated_at": new Date()
       },
@@ -30,6 +32,7 @@ export default class extends BaseSeeder {
         "contact_number": "555-123-4567",
         "contract_start_date": new Date('2023-03-01'),
         "contract_end_date": new Date('2024-03-01'),
+        "verification_state": "pending",
         "created_at": new Date(),
         "updated_at": new Date()
       },
