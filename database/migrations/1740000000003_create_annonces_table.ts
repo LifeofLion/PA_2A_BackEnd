@@ -15,8 +15,11 @@ export default class extends BaseSchema {
 
       table.string('title').notNullable()
       table.text('description').nullable()
+      table.integer('price').notNullable()
       table.specificType('tags', 'text[]').nullable()
       table.enum('state', ['open', 'pending', 'closed']).defaultTo('open')
+      table.dateTime('scheduled_date').nullable()
+      table.dateTime('actual_delivery_date').nullable()
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

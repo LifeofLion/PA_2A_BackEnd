@@ -1,4 +1,8 @@
 import { DateTime } from 'luxon'
+import Colis from '#models/colis'
+import Wharehouse from '#models/wharehouse'
+import { belongsTo } from '@adonisjs/lucid/orm'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class StockageColi extends BaseModel {
@@ -7,6 +11,9 @@ export default class StockageColi extends BaseModel {
 
   @column()
   declare colis_id: number
+
+  @column()
+  declare colis_tracking_number: string
 
   @column()
   declare wharehouse_id: number
@@ -21,8 +28,7 @@ export default class StockageColi extends BaseModel {
   declare description: string
 
   @belongsTo(() => Colis, {
-    foreignKey: 'colis_tracking_number',
-    ownerKey: 'tracking_number',
+    foreignKey: 'colis_id',
   })
   declare colis: BelongsTo<typeof Colis>
 

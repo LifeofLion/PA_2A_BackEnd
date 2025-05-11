@@ -54,14 +54,20 @@
     "@adonisjs/auth": "^9.3.1",
     "@adonisjs/core": "^6.17.2",
     "@adonisjs/cors": "^2.2.1",
+    "@adonisjs/drive": "^3.4.1",
     "@adonisjs/lucid": "^21.6.0",
+    "@aws-sdk/client-s3": "^3.802.0",
+    "@aws-sdk/s3-request-presigner": "^3.802.0",
     "@vinejs/vine": "^3.0.0",
     "adonis-autoswagger": "^3.68.0",
     "adonis-swagger": "^1.2.9",
+    "aws-sdk": "^2.1692.0",
     "luxon": "^3.5.0",
     "pg": "^8.14.1",
     "reflect-metadata": "^0.2.2",
-    "resend": "^4.4.0"
+    "resend": "^4.4.0",
+    "socket.io": "^4.8.1",
+    "ws": "^8.18.1"
   },
   "hotHook": {
     "boundaries": [

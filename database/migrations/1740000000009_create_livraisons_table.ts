@@ -7,8 +7,6 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.integer('livreur_id').unsigned().nullable()
-      table.dateTime('scheduled_date').nullable()
-      table.dateTime('actual_delivery_date').nullable()
       table.text('pickup_location').notNullable()
       table.text('dropoff_location').notNullable()
       table.enum('status', ['scheduled', 'in_progress', 'completed', 'cancelled']).defaultTo('scheduled')

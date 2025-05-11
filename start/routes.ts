@@ -19,6 +19,10 @@ const CommercantController = () => import('#controllers/commercants_controller')
 const AnnonceController = () => import('#controllers/annonces_controller')
 const ColisController = () => import('#controllers/colis_controller')
 const LivraisonController = () => import('#controllers/livraisons_controller')
+const MessageController = () => import('#controllers/messages_controller')
+const StorageBoxController = () => import('#controllers/storage_box_controller')
+const WharehousesController = () => import('#controllers/wharehouses_controller')
+const JustificationPiecesController = () => import('#controllers/justification_pieces_controller')
 
 import { middleware } from '#start/kernel'
 
@@ -44,13 +48,16 @@ router
     router.post('login', [AuthController, 'login'])
     router.post('register', [AuthController, 'register'])
     router.get('me', [AuthController, 'me']).use(middleware.auth())
+    router.post('logout', [AuthController, 'remove_token']).use(middleware.auth())
   })
   .prefix('auth')
 
 router
   .group(() => {
-    router.get(':id', [UtilisateursController, 'get'])
-    router.put(':id', [UtilisateursController, 'update'])
+    router.get('all', [UtilisateursController, 'getAll'])
+    router.get(':id', [UtilisateursController, 'get']).use(middleware.auth())
+    router.put(':id', [UtilisateursController, 'update']).use(middleware.auth())
+    router.post('check-password', [UtilisateursController, 'checkPassword'])
   })
   .prefix('utilisateurs')
 
@@ -89,6 +96,7 @@ router
 router
   .group(() => {
     router.post('create', [AnnonceController, 'create'])
+    router.post('create-with-colis', [AnnonceController, 'createWithColis'])
     router.post(':id/livraisons', [LivraisonController, 'create'])
     router.get(':id', [AnnonceController, 'getAnnonce'])
     router.get('/user/:utilisateur_id', [AnnonceController, 'getUserAnnonces'])
@@ -100,8 +108,28 @@ router
   .group(() => {
     router.post('create', [ColisController, 'create'])
     router.get(':tracking_number', [ColisController, 'getColis'])
+    router.get('tracking/:tracking_number', [ColisController, 'getColisByTrackingNumber'])
+    router.get('tracking-history/:tracking_number', [ColisController, 'getTrackingHistory'])
   })
   .prefix('colis')
+
+router
+  .group(() => {
+    router.post('create', [StorageBoxController, 'create'])
+    router.get(':id', [StorageBoxController, 'getStorageBox'])
+    router.put(':id', [StorageBoxController, 'update'])
+    router.delete(':id', [StorageBoxController, 'delete'])
+  })
+  .prefix('storage-boxes')
+
+router
+  .group(() => {
+    router.post('create', [WharehousesController, 'create'])
+    router.get(':id', [WharehousesController, 'getWharehouse'])
+    router.put(':id', [WharehousesController, 'update'])
+    router.delete(':id', [WharehousesController, 'delete'])
+  })
+  .prefix('wharehouses')
 
 router
   .group(() => {
@@ -109,3 +137,24 @@ router
     router.put(':id', [LivraisonController, 'update'])
   })
   .prefix('livraisons')
+
+router
+  .group(() => {
+    router.post('/', [MessageController, 'send']).use(middleware.auth())
+    router.get('inbox', [MessageController, 'inbox']).use(middleware.auth())
+    router.put(':id/read', [MessageController, 'markRead']).use(middleware.auth())
+  })
+  .prefix('messages')
+
+router
+  .group(() => {
+    router.post('create', [JustificationPiecesController, 'create'])
+    router.get('all', [JustificationPiecesController, 'getAll'])
+    router.get('unverified', [JustificationPiecesController, 'getUnverified'])
+    router.get('verified', [JustificationPiecesController, 'getVerified'])
+    router.get('user/:user_id', [JustificationPiecesController, 'getUserPieces'])
+    router.put('verify/:id', [JustificationPiecesController, 'verify'])
+    router.put('reject/:id', [JustificationPiecesController, 'reject'])
+    router.get(':id', [JustificationPiecesController, 'get'])
+  })
+  .prefix('justification-pieces')

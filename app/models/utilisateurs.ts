@@ -31,6 +31,15 @@ export default class Utilisateurs extends compose(BaseModel, AuthFinder) {
   declare address: string | null
 
   @column()
+  declare city: string
+
+  @column({ columnName: 'postal_code' })
+  declare postalCode: string
+
+  @column()
+  declare country: string
+
+  @column()
   declare phone_number: string | null
 
   @column()

@@ -19,10 +19,19 @@ export default class Annonce extends BaseModel {
   declare description: string | null
 
   @column()
+  declare price: number
+
+  @column()
   declare tags: string[]
 
   @column()
   declare state: 'open' | 'pending' | 'closed'
+
+  @column.dateTime({ columnName: 'scheduled_date' })
+  declare scheduledDate: DateTime | null
+
+  @column.dateTime({ columnName: 'actual_delivery_date' })
+  declare actualDeliveryDate: DateTime | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

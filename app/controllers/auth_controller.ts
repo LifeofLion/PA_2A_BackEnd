@@ -2,17 +2,12 @@ import type { HttpContext } from '@adonisjs/core/http'
 import { loginValidator } from '#validators/login'
 import { registerValidator } from '#validators/register'
 import Utilisateurs from '#models/utilisateurs'
+import AccessToken from '#models/access_token'
 
 export default class AuthController {
   async login({ request, response }: HttpContext) {
     try {
-      const { email, password, confirm_password } = await request.validateUsing(loginValidator)
-
-      if (password !== confirm_password) {
-        return response
-          .status(400)
-          .send({ error_message: 'Password and confirmation do not match' })
-      }
+      const { email, password } = await request.validateUsing(loginValidator)
 
       const user = await Utilisateurs.verifyCredentials(email, password)
 
@@ -74,6 +69,9 @@ export default class AuthController {
         password: payload.password,
         phone_number: payload.phone_number || null,
         address: payload.address || null,
+        city: payload.city,
+        postalCode: payload.postalCode,
+        country: payload.country,
       })
 
       const token = await Utilisateurs.accessTokens.create(user)
@@ -89,6 +87,20 @@ export default class AuthController {
       const user = await auth.authenticate()
       return response.ok(user)
     } catch (error) {
+      return response.status(401).send({ message: 'Unauthorized access' })
+    }
+  }
+
+  async remove_token({ auth, response }: HttpContext) {
+    try {
+      const user = await auth.authenticate()
+      const token = await AccessToken.findBy('tokenableId', user.id)
+      if (token) {
+        await token.delete()
+      }
+      return response.ok({ message: 'Token deleted successfully' })
+    }
+    catch (error) {
       return response.status(401).send({ message: 'Unauthorized access' })
     }
   }

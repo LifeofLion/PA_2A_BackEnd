@@ -12,12 +12,6 @@ export default class Livraison extends BaseModel {
   @column({ columnName: 'livreur_id' })
   declare livreurId: number | null
 
-  @column.dateTime()
-  declare scheduledDate: DateTime | null
-
-  @column.dateTime()
-  declare actualDeliveryDate: DateTime | null
-
   @column()
   declare pickupLocation: string
 

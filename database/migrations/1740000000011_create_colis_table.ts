@@ -14,6 +14,8 @@ export default class CreateColisTable extends BaseSchema {
       table.decimal('height', 8, 2).notNullable()
       table.string('content_description').nullable()
       table.enum('status', ['stored', 'in_transit', 'delivered', 'lost']).defaultTo('stored')
+      table.integer('client_id').unsigned().nullable()
+      table.integer('warehouse_id').unsigned().nullable()
 
       table.timestamp('created_at')
       table.timestamp('updated_at')
@@ -23,6 +25,18 @@ export default class CreateColisTable extends BaseSchema {
         .references('id')
         .inTable('annonces')
         .onDelete('CASCADE')
+
+      table
+        .foreign('client_id')
+        .references('id')
+        .inTable('utilisateurs')
+        .onDelete('SET NULL')
+
+      table
+        .foreign('warehouse_id')
+        .references('id')
+        .inTable('wharehouses')
+        .onDelete('SET NULL')
     })
   }
 
