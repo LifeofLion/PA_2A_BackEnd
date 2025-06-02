@@ -1,0 +1,996 @@
+{
+	"info": {
+		"_postman_id": "bba6b4e1-2221-4e46-a2d8-e46fdb5dc0c1",
+		"name": "EcoDeli",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24152469"
+	},
+	"item": [
+		{
+			"name": "Authentification",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"leo@richybaby.com\",\r\n    \"password\": \"go56ws!+\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/auth/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register user 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Martin Luther\",\r\n    \"last_name\": \"King\",\r\n    \"address\": \"15 Bd Saint-Martin\",\r\n    \"city\": \"Paris\",\r\n    \"postalCode\": \"75003\",\r\n    \"country\": \"France\",\r\n    \"phone_number\": \"0612345678\",\r\n    \"email\": \"mlk@example.com\",\r\n    \"password\": \"123456\",\r\n    \"confirm_password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register user 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Martin Luther\",\r\n    \"last_name\": \"King\",\r\n    \"address\": \"15 Bd Saint-Martin\",\r\n    \"city\": \"Paris\",\r\n    \"postalCode\": \"75003\",\r\n    \"country\": \"France\",\r\n    \"phone_number\": \"0612345678\",\r\n    \"email\": \"mlk@example.com\",\r\n    \"password\": \"123456\",\r\n    \"confirm_password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "oat_Mw.cUdrQW9LdGN1SktTNzZkNzBDdm4yWTJzcnJtYXNvVTRBb2xFQ2otSzE0MjA4ODE5MTI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/auth/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "get_client",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/utilisateurs/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"utilisateurs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "oat_Mg.NFlfQWdXZkUwaWhkVWVIcXdYTmRUWnJ1RkYtU2JrRnJwRld4VUd3SzE0NTU1Mjc4MDE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Killian\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/utilisateurs/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"utilisateurs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check_password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"john.doe@example.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/utilisateurs/check-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"utilisateurs",
+								"check-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "get_user_profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/clients/1/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clients",
+								"1",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/clients/add",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clients",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_user_profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"loyalty_points\": 150\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/clients/1/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clients",
+								"1",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Livreurs",
+			"item": [
+				{
+					"name": "get_livreur_profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/livreurs/1/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"livreurs",
+								"1",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_livreur",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/livreurs/add",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"livreurs",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_livreur_profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"availability_status\": \"unavailable\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/livreurs/1/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"livreurs",
+								"1",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Prestataires",
+			"item": [
+				{
+					"name": "get_prestataires_profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/prestataires/1/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prestataires",
+								"1",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_prestataire",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/prestataires/add",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prestataires",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_prestataire_profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 3.50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/prestataires/1/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prestataires",
+								"1",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Commercants",
+			"item": [
+				{
+					"name": "get_commercant_profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/commercants/1/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"commercants",
+								"1",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_commercant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 4,\r\n    \"store_name\": \"Sephora\",\r\n    \"contract_start_date\": \"2025-04-19\",\r\n    \"contract_end_date\": \"2026-04-19\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/commercants/add",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"commercants",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_prestataire_profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"contract_end_date\": \"2027-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/commercants/1/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"commercants",
+								"1",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Annonces",
+			"item": [
+				{
+					"name": "create_annonce",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"utilisateur_id\": 1,\r\n  \"title\": \"Livraison meubles IKEA\",\r\n  \"description\": \"3 cartons de meubles à livrer\",\r\n  \"price\": 45.99,\r\n  \"tags\": [\"meuble\", \"ikea\", \"fragile\"],\r\n  \"scheduled_date\": \"2023-07-20T14:00:00.000Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/annonces/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"annonces",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_annonce",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/annonces/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"annonces",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_annonce",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"state\": \"pending\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/annonces/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"annonces",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_annonce_user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/annonces/user/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"annonces",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Colis",
+			"item": [
+				{
+					"name": "create_colis",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"annonce_id\": 1,\r\n    \"weight\": 0.5,\r\n    \"length\": 33,\r\n    \"width\": 19,\r\n    \"height\": 11.5,\r\n    \"content_description\": \"Air Jordan 3 Retro\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/colis/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"colis",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_colis",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/colis/{{tracking_number}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"colis",
+								"{{tracking_number}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tracking number history",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/colis/{{tracking_number}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"colis",
+								"{{tracking_number}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tracking by number",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/colis/{{tracking_number}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"colis",
+								"{{tracking_number}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tracking number update location",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location_type\": \"in_transit\",\n  \"location_id\": null,\n  \"description\": \"Colis pris en charge par le livreur\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/colis/{{tracking_number}}/update-location",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"colis",
+								"{{tracking_number}}",
+								"update-location"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Code Temporaire",
+			"item": [
+				{
+					"name": "generate_code",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_info\": \"{code: {'first_name': 'leo', 'last_name': 'croft'}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/codes-temporaire/generate-code",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"codes-temporaire",
+								"generate-code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check_code",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_info\": \"{code: code}\",\r\n    \"code\": \"689954\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/codes-temporaire/check-code",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"codes-temporaire",
+								"check-code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset_code",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_info\": \"{code: code}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/codes-temporaire/reset-code",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"codes-temporaire",
+								"reset-code"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Email Sending",
+			"item": [
+				{
+					"name": "{{base_url}}/send-email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"to\": \"leo@richybaby.com\",\r\n    \"subject\": \"Test envoi d'email manuel\",\r\n    \"body\": \"<h1>Test D'envoi Manuel</h1>\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/send-email",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"send-email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wharehouses",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location\": \"13 Avenue Jean Moulin, 13100 Aix-en-Provence\",\n  \"capacity\": 150\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/wharehouses/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"wharehouses",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get wharehouses capacity",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stockage-colis",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"colis_id\": 1,\n  \"wharehouse_id\": 1,\n  \"storage_area\": \"Zone A-42\",\n  \"stored_until\": \"2025-08-01\",\n  \"description\": \"Stocké près de l'entrée pour faciliter l'accès\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/stockage-colis/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"stockage-colis",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "oat_Nw.VGY2cEo3YnhubUdFcENueW0tSWtxYUo0aVpydnVxYXhOcXAtVk1YcDMzNzQzMTkyOTI",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
