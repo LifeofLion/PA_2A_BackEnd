@@ -65,6 +65,7 @@ router
 router
   .group(() => {
     router.get('all', [UtilisateursController, 'getIndex'])
+    router.get('get-recent', [UtilisateursController, 'getRecent']).use(middleware.auth())
     router.get(':id', [UtilisateursController, 'get']).use(middleware.auth())
     router.put(':id', [UtilisateursController, 'update']).use(middleware.auth())
     router.post('check-password', [UtilisateursController, 'checkPassword'])
@@ -143,7 +144,6 @@ router
   })
   .prefix('colis')
 
-// Groupe de routes administratives pour les colis
 router
   .group(() => {
     router.get('/', [ColisController, 'getAllColis'])

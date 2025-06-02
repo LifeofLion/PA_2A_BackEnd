@@ -7,7 +7,7 @@ import type { ExtractModelRelations } from '@adonisjs/lucid/types/relations'
 export default class AdminController {
   async index({ response }: HttpContext) {
     try {
-      const admins = await Admin.query().preload('user' as ExtractModelRelations<Admin>)
+      const admins = await Admin.query().preload('user' as unknown as ExtractModelRelations<Admin>)
       return response.ok(admins)
     } catch (error) {
       return response.status(500).send({ error_message: 'Failed to fetch admins', error })
@@ -36,7 +36,7 @@ export default class AdminController {
         privileges: privileges || 'basic',
       })
 
-      await admin.load('user' as ExtractModelRelations<Admin>)
+      await admin.load('user' as unknown as ExtractModelRelations<Admin>)
       return response.created(admin)
     } catch (error) {
       return response.status(500).send({ error_message: 'Failed to create admin', error })
@@ -48,7 +48,7 @@ export default class AdminController {
       const id = request.param('id')
       const admin = await Admin.query()
         .where('id', id)
-        .preload('user' as ExtractModelRelations<Admin>)
+        .preload('user' as unknown as ExtractModelRelations<Admin>)
         .firstOrFail()
       return response.ok(admin)
     } catch (error) {
@@ -69,7 +69,7 @@ export default class AdminController {
       admin.privileges = privileges
       await admin.save()
 
-      await admin.load('user' as ExtractModelRelations<Admin>)
+      await admin.load('user' as unknown as ExtractModelRelations<Admin>)
       return response.ok(admin)
     } catch (error) {
       return response.status(500).send({ error_message: 'Failed to update admin', error })

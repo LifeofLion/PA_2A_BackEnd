@@ -4,7 +4,7 @@ import { checkPasswordValidator } from '#validators/check_password'
 import Utilisateurs from '#models/utilisateurs'
 
 export default class UtilisateursController {
-  async getIndex({ request, response }: HttpContext) {
+  async getIndex({ response }: HttpContext) {
     try {
       const users = await Utilisateurs.all()
       console.log('Utilisateurs trouvés:', users.length, users)
@@ -21,6 +21,47 @@ export default class UtilisateursController {
       return response.ok(user.serialize())
     } catch (error) {
       return response.notFound({ message: 'Utilisateurs not found' })
+    }
+  }
+
+  async getRecent({ response }: HttpContext) {
+    try {
+      const users = await Utilisateurs.query()
+        .select('id', 'first_name', 'last_name', 'address', 'created_at')
+        .preload('admin')
+        .preload('livreur') 
+        .preload('prestataire')
+        .orderBy('createdAt', 'desc')
+        .limit(5)
+
+      if (!users || users.length === 0) {
+        return response.notFound({ message: 'No recent users found' })
+      }
+
+      const usersWithRoles = users.map(user => {
+        let role = 'client' 
+        
+        if (user.$preloaded.admin) role = 'admin'
+        else if (user.$preloaded.livreur) role = 'livreur'
+        else if (user.$preloaded.prestataire) role = 'prestataire'
+
+        return {
+          id: user.id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          address: user.address,
+          role: role,
+          created_at: user.createdAt
+        }
+      })
+
+      return response.ok(usersWithRoles)
+    } catch (error) {
+      console.error('Error in getRecent:', error)
+      return response.internalServerError({ 
+        message: 'An error occurred while fetching recent users',
+        error: error.message 
+      })
     }
   }
 
